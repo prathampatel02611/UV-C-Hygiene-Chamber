@@ -1,5 +1,10 @@
 # Sustainable UV-C Hygiene Chamber
 
+![Hardware Project](https://img.shields.io/badge/Project-Hardware-blue)
+![Electronics](https://img.shields.io/badge/Field-Electronics-green)
+![Timer IC](https://img.shields.io/badge/IC-NE555-orange)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+
 A low-cost UV-C sterilization chamber designed to promote the hygienic reuse of glass cups and reduce disposable plastic waste in institutions and workplaces.
 
 ## Problem
@@ -16,6 +21,20 @@ The chamber automatically activates only when the door is closed and provides a 
 
 ---
 
+## System Architecture
+
+The system consists of the following functional blocks:
+
+- 12V DC Power Supply
+- Door Limit Switch (Safety Interlock)
+- Timer A (UV Exposure Timer)
+- Relay Driver
+- UV-C Lamp
+- Timer B (Completion Indicator)
+- Buzzer Notification
+
+---
+
 # Block Diagram
 
 ![Block Diagram](images/block_diagram.png)
@@ -28,20 +47,6 @@ The chamber automatically activates only when the door is closed and provides a 
 
 ---
 
-# System Components
-
-Main components used in the project:
-
-- NE555 Timer IC (×2)
-- UV-C Germicidal Lamp
-- Relay / Relay Driver
-- Door Limit Switch
-- Buzzer
-- Resistors and Capacitors
-- 12V DC Power Supply
-- Transistor (BC547)
-
----
 
 # Working Principle
 
@@ -89,6 +94,27 @@ Possible enhancements include:
 - IoT monitoring
 - UV leakage detection
 - Multi-object sterilization chamber
+
+---
+## Engineering Challenges
+
+### Timer B Incorrect Triggering
+Timer B initially stayed active due to a constant LOW signal.
+
+Solution:
+A coupling capacitor and pull-up resistor were added to convert the signal into a falling-edge trigger.
+
+### Noise on Trigger Pins
+Mechanical bounce from the limit switch caused false triggering.
+
+Solution:
+Debounce capacitors and pull-up resistors were added.
+
+### Safety Concerns
+Initial prototype lacked reliable UV safety cutoff.
+
+Solution:
+A door limit switch was integrated to ensure the UV lamp activates only when the chamber is closed.
 
 ---
 
